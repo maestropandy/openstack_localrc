@@ -1,0 +1,58 @@
+[[local|localrc]]
+
+# ===== BEGIN localrc =====
+DATABASE_PASSWORD=admin
+RABBIT_PASSWORD=admin
+SERVICE_TOKEN=admin
+SERVICE_PASSWORD=admin
+ADMIN_PASSWORD=admin
+
+# Enable Logging
+LOGFILE=$DEST/logs/stack.sh.log
+VERBOSE=True
+LOG_COLOR=True
+SCREEN_LOGDIR=$DEST/logs
+
+# Pre-requisite
+ENABLED_SERVICES=rabbit,mysql,key
+
+# Horizon
+ENABLED_SERVICES+=,horizon
+
+# Nova
+ENABLED_SERVICES+=,n-api,n-crt,n-cpu,n-cond,n-sch
+
+# Glance
+ENABLED_SERVICES+=,g-api,g-reg
+
+# Neutron
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta
+
+# Load the external LBaaS plugin.
+enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
+enable_plugin octavia https://git.openstack.org/openstack/octavia
+
+# Swift - Object Storage
+ENABLED_SERVICES+=,s-proxy,s-object,s-container,s-account
+
+# Enable LBaaS v2
+ENABLED_SERVICES+=,q-lbaasv2
+ENABLED_SERVICES+=,octavia,o-cw,o-hk,o-hm,o-api
+
+# Cinder
+ENABLED_SERVICES+=,c-api,c-vol,c-sch,c-bak
+
+# Tempest
+ENABLED_SERVICES+=,tempest
+
+# Heat - Orchestration Service
+#ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+
+# Ceilometer - Metering Service (metering + alarming)
+#ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
+#ENABLED_SERVICES+=,ceilometer-alarm-notify,ceilometer-alarm-eval
+
+
+# Apache fronted for WSGI
+#APACHE_ENABLED_SERVICES+=keystone,swift
+# ===== END localrc =====#
