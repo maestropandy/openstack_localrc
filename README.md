@@ -1,2 +1,2 @@
 # openstack_localrc
-Localrc file for devstack with all openstack components
+latest Localrc file for devstack/liberty release along with lbaas
